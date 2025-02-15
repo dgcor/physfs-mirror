@@ -28,3 +28,12 @@ jobs:
       run: cmake -B build ${{ matrix.platform.flags }}
     - name: Build
       run: cmake --build build/
+
+    - name: Create zip
+      run: 7z a physfs.zip * -r
+
+    - name: Create zip artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: "physfs-${{ matrix.platform.name }}.zip"
+        path: physfs.zip
